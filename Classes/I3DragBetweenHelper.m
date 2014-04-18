@@ -644,6 +644,10 @@
                                              [self.draggingView center].y + translation.y)];
     [gestureRecognizer setTranslation:CGPointZero inView:[self.draggingView superview]];
 
+    if ([_delegate respondsToSelector:@selector(dragginAtPoint:)])
+    {
+        [_delegate dragginAtPoint:[gestureRecognizer locationInView:self.superview]];
+    }
 }
 
 
@@ -667,7 +671,7 @@
         
         /* If its an invalid cell then no dragging is started */
         
-        //self.isDragging = NO;
+        self.isDragging = NO;
         self.draggingView = nil;
 
     }
@@ -837,6 +841,7 @@
 
         /* If its an invalid cell then no dragging is started */
 
+        self.isDragging = NO;
         self.draggingView = nil;
     }
     
